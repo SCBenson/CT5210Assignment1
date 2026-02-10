@@ -1,7 +1,5 @@
 package usecases;
-
 import entities.Book;
-
 import java.util.List;
 
 public class ListBooksUseCase {

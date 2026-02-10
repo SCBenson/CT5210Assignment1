@@ -12,7 +12,7 @@ public interface LibraryRepository {
     List<Book> getAllBooks();
     Optional<Book> findBookById(String bookId);
 
-    // Members
+    //members
     void addMember(Member member);
     Optional<Member> findMemberById(String memberId);
 

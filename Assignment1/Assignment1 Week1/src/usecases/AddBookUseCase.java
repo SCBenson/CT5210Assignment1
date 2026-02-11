@@ -9,8 +9,8 @@ public class AddBookUseCase {
         this.repo = repo;
     }
 
-    public void execute(String id, String title, String author) {
-        Book book = new Book(id, title, author);
+    public void execute(String id, String title, String author, Boolean availability) {
+        Book book = new Book(id, title, author, availability);
         repo.addBook(book);
     }
 }

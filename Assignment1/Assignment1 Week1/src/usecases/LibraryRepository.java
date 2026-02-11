@@ -1,4 +1,5 @@
 package usecases;
+
 import entities.Book;
 import entities.Member;
 import entities.BorrowRecord;
@@ -9,15 +10,20 @@ public interface LibraryRepository {
 
     // Books
     void addBook(Book book);
+
     List<Book> getAllBooks();
+
     Optional<Book> findBookById(String bookId);
 
-    //members
+    // members
     void addMember(Member member);
+
     Optional<Member> findMemberById(String memberId);
 
     // Borrow records
     void addBorrowRecord(BorrowRecord record);
+
     Optional<BorrowRecord> findActiveBorrowByBookId(String bookId);
+
     List<BorrowRecord> getAllBorrowRecords();
 }

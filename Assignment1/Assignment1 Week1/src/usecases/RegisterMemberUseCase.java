@@ -1,4 +1,5 @@
 package usecases;
+
 import entities.Member;
 
 public class RegisterMemberUseCase {

@@ -1,4 +1,5 @@
 package usecases;
+
 import entities.Book;
 import entities.BorrowRecord;
 import java.time.LocalDate;
@@ -13,10 +14,12 @@ public class ReturnBookUseCase {
 
     public String execute(String bookId) {
         Optional<Book> bookOpt = repo.findBookById(bookId);
-        if (bookOpt.isEmpty()) return "Book not found.";
+        if (bookOpt.isEmpty())
+            return "Book not found.";
 
         Optional<BorrowRecord> recordOpt = repo.findActiveBorrowByBookId(bookId);
-        if (recordOpt.isEmpty()) return "This book is not currently borrowed.";
+        if (recordOpt.isEmpty())
+            return "This book is not currently borrowed.";
 
         BorrowRecord record = recordOpt.get();
         record.markReturned(LocalDate.now());
@@ -27,4 +30,3 @@ public class ReturnBookUseCase {
         return "Returned successfully.";
     }
 }
-

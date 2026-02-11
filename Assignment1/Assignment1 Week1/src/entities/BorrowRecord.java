@@ -1,5 +1,6 @@
 package entities;
-import java.util.LocalDate;
+
+import java.time.LocalDate; // was java.util.LocalDate --> Changed to java.time.LocalDate
 
 public class BorrowRecord {
     private final String recordId;
@@ -15,20 +16,37 @@ public class BorrowRecord {
         this.borrowDate = borrowDate;
     }
 
-    public String getRecordId() { return recordId; }
-    public String getBookId() { return bookId; }
-    public String getMemberId() { return memberId; }
-    public LocalDate getBorrowDate() { return borrowDate; }
-    public LocalDate getReturnDate() { return returnDate; }
+    public String getRecordId() {
+        return recordId;
+    }
 
-    public boolean isReturned() { return returnDate != null; }
-    public void markReturned(LocalDate returnDate) { this.returnDate = returnDate; }
+    public String getBookId() {
+        return bookId;
+    }
 
-    @Override
+    public String getMemberId() {
+        return memberId;
+    }
+
+    public LocalDate getBorrowDate() {
+        return borrowDate;
+    }
+
+    public LocalDate getReturnDate() {
+        return returnDate;
+    }
+
+    public boolean isReturned() {
+        return returnDate != null;
+    }
+
+    public void markReturned(LocalDate returnDate) {
+        this.returnDate = returnDate;
+    }
+
     @Override
     public String toString() {
         return "BorrowRecord{recordId='" + recordId + "', bookId='" + bookId + "', memberId='" + memberId +
                 "', borrowDate=" + borrowDate + ", returnDate=" + returnDate + "}";
     }
 }
-

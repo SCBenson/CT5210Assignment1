@@ -1,7 +1,5 @@
 package entities;
 
-package entities;
-
 public class Member {
     private final String memberId;
     private final String name;
@@ -11,8 +9,13 @@ public class Member {
         this.name = name;
     }
 
-    public String getMemberId() { return memberId; }
-    public String getName() { return name; }
+    public String getMemberId() {
+        return memberId;
+    }
+
+    public String getName() {
+        return name;
+    }
 
     @Override
     public String toString() {

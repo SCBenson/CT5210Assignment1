@@ -19,21 +19,23 @@ public class BorrowBookUseCase {
         Optional<Book> bookOpt = repo.findBookById(bookId);
         Optional<Member> memberOpt = repo.findMemberById(memberId);
 
-        if (bookOpt.isEmpty()) return "Book not found.";
-        if (memberOpt.isEmpty()) return "Member not found.";
+        if (bookOpt.isEmpty())
+            return "Book not found.";
+        if (memberOpt.isEmpty())
+            return "Member not found.";
 
         Book book = bookOpt.get();
-        if (!book.isAvailable()) return "Book is already borrowed.";
+        if (!book.isAvailable())
+            return "Book is already borrowed.";
 
-        //mark bookunavailable
+        // mark bookunavailable
         book.setAvailable(false);
 
         BorrowRecord record = new BorrowRecord(
                 UUID.randomUUID().toString(),
                 bookId,
                 memberId,
-                LocalDate.now()
-        );
+                LocalDate.now());
         repo.addBorrowRecord(record);
 
         return "Borrowed successfully.";

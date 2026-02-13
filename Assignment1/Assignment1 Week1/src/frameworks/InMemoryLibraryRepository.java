@@ -3,6 +3,7 @@ package frameworks;
 import entities.Book;
 import entities.Member;
 import entities.BorrowRecord;
+import java.util.List;
 import java.util.ArrayList;
 import java.util.Optional;
 
@@ -19,8 +20,8 @@ public class InMemoryLibraryRepository implements LibraryRepository {
     }
 
     @Override
-    public ArrayList<Book> getAllBooks() {
-        return new ArrayList<>(books);
+    public List<Book> getAllBooks() {
+        return new List<>(books);
     }
 
     @Override

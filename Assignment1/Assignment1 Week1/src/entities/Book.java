@@ -1,22 +1,16 @@
 package entities;
 
 public class Book {
-    private final String id;
     private final String title;
     private final String author;
     private final String isbn;
     private int copies;
 
-    public Book(String id, String title, String author, String isbn, int copies) {
-        this.id = id;
+    public Book(String title, String author, String isbn, int copies) {
         this.title = title;
         this.author = author;
         this.isbn = isbn;
         this.copies = copies;
-    }
-
-    public String getId() {
-        return id;
     }
 
     public String getTitle() {
@@ -37,7 +31,7 @@ public class Book {
 
     @Override
     public String toString() {
-        return "Book{ id='" + id + "', title='" + title + "', author='" + author + "', isbn='" + isbn + "', copies='"
+        return "Book{ title='" + title + "', author='" + author + "', isbn='" + isbn + "', copies='"
                 + copies + "'}";
     }
 }

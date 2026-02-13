@@ -6,15 +6,13 @@ public class Book {
     private final String author;
     private final String isbn;
     private int copies;
-    private Boolean available; // should not be final, as the availability of the book will change.
 
-    public Book(String id, String title, String author, String isbn, int copies, Boolean available) {
+    public Book(String id, String title, String author, String isbn, int copies) {
         this.id = id;
         this.title = title;
         this.author = author;
         this.isbn = isbn;
         this.copies = copies;
-        this.available = true;
     }
 
     public String getId() {
@@ -37,16 +35,9 @@ public class Book {
         return copies;
     }
 
-    public boolean isAvailable() {
-        return available; // need to refactor to check if copies is non-zero and flip availability if not.
-    }
-
-    public void setAvailable(boolean available) {
-        this.available = available;
-    }
-
     @Override
     public String toString() {
-        return "Book{ id='" + id + "', title='" + title + "', author='" + author + "', available=" + available + "}";
+        return "Book{ id='" + id + "', title='" + title + "', author='" + author + "', isbn='" + isbn + "', copies='"
+                + copies + "'}";
     }
 }

@@ -9,8 +9,7 @@ public class RegisterMemberUseCase {
         this.repo = repo;
     }
 
-    public void execute(String memberId, String name) {
-        Member member = new Member(memberId, name);
+    public void execute(Member member) {
         repo.addMember(member);
     }
 }

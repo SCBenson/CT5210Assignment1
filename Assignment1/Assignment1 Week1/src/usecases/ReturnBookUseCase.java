@@ -12,21 +12,20 @@ public class ReturnBookUseCase {
         this.repo = repo;
     }
 
-    public String execute(String bookId) {
+    public boolean execute(String bookId) {
         Optional<Book> bookOpt = repo.findBookById(bookId);
         if (bookOpt.isEmpty())
-            return "Book not found.";
+            return false;
 
         Optional<BorrowRecord> recordOpt = repo.findActiveBorrowByBookId(bookId);
         if (recordOpt.isEmpty())
-            return "This book is not currently borrowed.";
+            return false;
 
         BorrowRecord record = recordOpt.get();
         record.markReturned(LocalDate.now());
 
         Book book = bookOpt.get();
-        book.setAvailable(true);
 
-        return "Returned successfully.";
+        return true;
     }
 }

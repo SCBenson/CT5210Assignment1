@@ -15,21 +15,20 @@ public class BorrowBookUseCase {
         this.repo = repo;
     }
 
-    public String execute(String bookId, String memberId) {
+    public Boolean execute(String bookId, String memberId) {
         Optional<Book> bookOpt = repo.findBookById(bookId);
         Optional<Member> memberOpt = repo.findMemberById(memberId);
 
         if (bookOpt.isEmpty())
-            return "Book not found.";
+            return false;
         if (memberOpt.isEmpty())
-            return "Member not found.";
+            return false;
 
         Book book = bookOpt.get();
-        if (!book.isAvailable())
-            return "Book is already borrowed.";
+        if (book.getAvailableCopies() < 1)
+            return false;
 
         // mark bookunavailable
-        book.setAvailable(false);
 
         BorrowRecord record = new BorrowRecord(
                 UUID.randomUUID().toString(),
@@ -38,6 +37,6 @@ public class BorrowBookUseCase {
                 LocalDate.now());
         repo.addBorrowRecord(record);
 
-        return "Borrowed successfully.";
+        return true;
     }
 }

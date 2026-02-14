@@ -6,13 +6,19 @@ import entities.BorrowRecord;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Optional;
-
 import usecases.LibraryRepository;
 
 public class InMemoryLibraryRepository implements LibraryRepository {
-    private ArrayList<Book> books = new ArrayList<>();
-    private ArrayList<Member> members = new ArrayList<>();
-    private ArrayList<BorrowRecord> borrowRecords = new ArrayList<>();
+
+    private List<Book> books;
+    private List<Member> members;
+    private List<BorrowRecord> borrowRecords;
+
+    public InMemoryLibraryRepository() {
+        this.books = new ArrayList<>();
+        this.members = new ArrayList<>();
+        this.borrowRecords = new ArrayList<>();
+    }
 
     @Override
     public void addBook(Book book) {
@@ -50,7 +56,28 @@ public class InMemoryLibraryRepository implements LibraryRepository {
     }
 
     @Override
-    public ArrayList<BorrowRecord> getAllBorrowRecords() {
-        return new ArrayList<>(borrowRecords);
+    public List<BorrowRecord> getAllBorrowRecords() {
+        return new List<>(borrowRecords);
+    }
+
+    @Override
+    public List<Book> getAvailableBooks() {
+        return new List<>(Book);
+    }
+
+    @Override
+    public List<Book> searchBooksByTitle(String title) {
+        List<Book> matchingBooks = new ArrayList<>();
+        for (Book book : books) {
+            if (book.getTitle().toLowerCase().contains(title.toLowerCase())) {
+                matchingBooks.add(book);
+            }
+        }
+        return matchingBooks;
+    }
+
+    @Override
+    public List<Book> searchBooksByAuthor(String author) {
+        return new List<>(Book);
     }
 }

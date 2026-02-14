@@ -1,6 +1,7 @@
 package ui;
 
 import entities.Book;
+import entities.BorrowRecord;
 import controller.LibraryController;
 import java.util.Scanner;
 import java.util.List;
@@ -36,7 +37,12 @@ public class LibraryMenuUI {
         System.out.println("3) Borrow a Book");
         System.out.println("4) Return a Book");
         System.out.println("5) List All Books");
-        System.out.println("6) Exit");
+        System.out.println("6) Search Books by Title");
+        System.out.println("7) Search Books by Author");
+        System.out.println("8) View Available Books Only");
+        System.out.println("9) Find Book by ISBN");
+        System.out.println("10) View All Borrow Records");
+        System.out.println("11) Exit");
         System.out.println("Please select an option from above.");
     }
 
@@ -55,7 +61,12 @@ public class LibraryMenuUI {
             case 3 -> handleBorrowBook();
             case 4 -> handleReturnBook();
             case 5 -> handleListBooks();
-            case 6 -> handleExit();
+            case 6 -> handleSearchByTitle();
+            case 7 -> handleSearchByAuthor();
+            case 8 -> handleListAvailableBooks();
+            case 9 -> handleSearchByISBN();
+            case 10 -> handleListAllBorrowRecords();
+            case 11 -> handleExit();
             default -> System.out.println("Invalid option. Please choose an option 1-6.");
         }
     }
@@ -72,8 +83,9 @@ public class LibraryMenuUI {
         String isbn = scanner.nextLine().trim();
 
         System.out.print("Enter number of copies: ");
+        int copies = scanner.nextInt();
         try {
-            int copies = Integer.parseInt(scanner.nextLine().trim());
+            // int copies = Integer.parseInt(scanner.nextLine().trim());
             controller.addBook(title, author, isbn, copies);
             System.out.println("Book added successfully!");
         } catch (NumberFormatException e) {
@@ -141,6 +153,97 @@ public class LibraryMenuUI {
                         book.getAvailableCopies());
             }
         }
+    }
+
+    private void handleSearchByTitle() {
+        System.out.println("\n--- Search Book by Title ---");
+        System.out.print("Enter title: ");
+        String title = scanner.nextLine().trim();
+
+        List<Book> books = controller.searchBooksByTitle(title);
+
+        if (books.isEmpty()) {
+            System.out.println("No books found with title containing: " + title);
+        } else {
+            System.out.printf("%-20s %-20s %-15s %-10s%n", "Title", "Author", "ISBN", "Available");
+            System.out.print("-".repeat(70));
+            for (Book book : books) {
+                System.out.printf("%-20s %-20s %-15s %-10s%n",
+                        book.getTitle(),
+                        book.getAuthor(),
+                        book.getIsbn(),
+                        book.getAvailableCopies());
+            }
+        }
+    }
+
+    private void handleSearchByAuthor() {
+        System.out.println("\n--- Search Book by Author ---");
+        System.out.print("Enter author: ");
+        String author = scanner.nextLine().trim();
+
+        List<Book> books = controller.searchBooksByTitle(author);
+
+        if (books.isEmpty()) {
+            System.out.println("No books found with author containing: " + author);
+        } else {
+            System.out.printf("%-20s %-20s %-15s %-10s%n", "Title", "Author", "ISBN", "Available");
+            System.out.print("-".repeat(70));
+            for (Book book : books) {
+                System.out.printf("%-20s %-20s %-15s %-10s%n",
+                        book.getTitle(),
+                        book.getAuthor(),
+                        book.getIsbn(),
+                        book.getAvailableCopies());
+            }
+        }
+    }
+
+    private void handleListAvailableBooks() {
+        System.out.println("\n--- List of Available Books ---");
+
+    }
+
+    private void handleSearchByISBN() {
+        System.out.println("\n--- Search Book by ISBN ---");
+        System.out.print("Enter ISBN: ");
+        String isbn = scanner.nextLine().trim();
+
+        List<Book> books = controller.searchBooksByTitle(isbn);
+
+        if (books.isEmpty()) {
+            System.out.println("No books found with ISBN: " + isbn);
+        } else {
+            System.out.printf("%-20s %-20s %-15s %-10s%n", "Title", "Author", "ISBN", "Available");
+            System.out.print("-".repeat(70));
+            for (Book book : books) {
+                System.out.printf("%-20s %-20s %-15s %-10s%n",
+                        book.getTitle(),
+                        book.getAuthor(),
+                        book.getIsbn(),
+                        book.getAvailableCopies());
+            }
+        }
+    }
+
+    private void handleListAllBorrowRecords() {
+        System.out.println("\n--- All Borrow Records ---");
+        List<BorrowRecord> records = controller.listBorrowRecord();
+
+        if (records.isEmpty()) {
+            System.out.println("No borrow records found in the system.");
+        } else {
+            System.out.printf("%-20s %-20s %-15s %-10s%n", "Title", "Author", "ISBN", "Available");
+            System.out.print("-".repeat(70));
+            for (BorrowRecord record : records) {
+                System.out.printf("%-20s %-20s %-15s %-10s%n",
+                        record.getMemberId(),
+                        record.getBookId(),
+                        record.getBorrowDate(),
+                        record.getReturnDate() != null ? record.getReturnDate().toString() : "Not Returned");
+            }
+        }
+
     }
 
     private void handleExit() {

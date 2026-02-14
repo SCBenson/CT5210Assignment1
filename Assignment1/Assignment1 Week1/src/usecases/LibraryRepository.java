@@ -3,7 +3,7 @@ package usecases;
 import entities.Book;
 import entities.Member;
 import entities.BorrowRecord;
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 public interface LibraryRepository {
@@ -11,9 +11,13 @@ public interface LibraryRepository {
     // Books
     void addBook(Book book);
 
-    ArrayList<Book> getAllBooks();
+    List<Book> getAllBooks();
 
     Optional<Book> findBookById(String bookId);
+
+    List<Book> searchBooksByTitle(String title);
+
+    List<Book> findAvailableBooks();
 
     // members
     void addMember(Member member);
@@ -25,5 +29,5 @@ public interface LibraryRepository {
 
     Optional<BorrowRecord> findActiveBorrowByBookId(String bookId);
 
-    ArrayList<BorrowRecord> getAllBorrowRecords();
+    List<BorrowRecord> getAllBorrowRecords();
 }
